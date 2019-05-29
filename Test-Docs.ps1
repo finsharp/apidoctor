@@ -12,19 +12,12 @@ $fullDocsSubPath =  Join-Path $fullDocsPath $docSubPath
 $params ="check-all", "--path", "$fullDocsSubPath", "--ignore-warnings"
 $apiDoctor = Join-Path $repoPath $apiDoctorPath
 
-Write-Host $repoPath
-Write-Host $docSubPath
-Write-Host $fullDocsPath
-Write-Host $fullDocsSubPath
-Write-Host $params
-Write-Host $apiDoctor
-
-#Clone Docs Repo
-#New-Item -Path $graphDocsPath -ItemType Directory -Force
-Write-Host "Cloning Microsoft Graph Docs from Github"
-Write-Host "`tRemote URL: $graphDocsRepo"
-Write-Host "`tBranch: $graphDocsBranch"
-#$result = Invoke-Expression "git clone -b $graphDocsBranch $graphDocsRepo --recurse-submodules $fullDocsPath"
+Write-Host "Current Directory" $repoPath
+Write-Host "Docs Directory" $fullDocsPath
+Write-Host "Docs SubPath" $docSubPath
+Write-Host "Full Docs Path" $fullDocsSubPath
+Write-Host "ApiDoctor Path" $apiDoctor
+Write-Host "Params"  $params
 
 & $apiDoctor $params
 
@@ -35,7 +28,6 @@ if ($cleanUp -eq $true) {
 
 if ($LastExitCode -ne 0) {
     Write-Host "Errors were detected. This build failed."
-    Write-Host $LastExitCode
     exit $LastExitCode
 }
 
